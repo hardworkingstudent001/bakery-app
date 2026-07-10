@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BakeryGo - App Flow</title>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+const { useState } = React;
+
+const BakeryAppFlow = () => {
+  const [currentScreen, setCurrentScreen] = useState(0);
+
+  const screens = [
+    {
+      id: "intro",
+      section: "Introduction",
+      content: (
+        <div style={{ padding: "20px", textAlign: "center" }}>
+          <div style={{ fontSize: "48px", marginBottom: "10px" }}>🥐</div>
+          <h2 style={{ color: "#8B4513", margin: "0 0 8px" }}>BakeryGo</h2>
+          <p style={{ fontSize: "12px", color: "#666", margin: "0 0 16px" }}>Fresh Bread, Your Schedule</p>
+          <div style={{ background: "#FFF8F0", borderRadius: "12px", padding: "16px", textAlign: "left", marginBottom: "12px" }}>
+            <h4 style={{ color: "#8B4513", margin: "0 0 8px", fontSize: "13px" }}>The Problem</h4>
+            <ul style={{ fontSize: "11px", color: "#555", margin: 0, paddingLeft: "16px", lineHeight: "1.8" }}>
+              <li>Fresh bread sells out early — evening customers miss it</li>
+              <li>Long queues waste time during rush hours</li>
+              <li>No easy way to check what's available right now</li>
+              <li>Hard to find allergen & nutrition info before buying</li>
+              <li>Bakeries close early — no pickup after hours</li>
+            </ul>
+          </div>
+          <div style={{ background: "#F0FFF0", borderRadius: "12px", padding: "16px", textAlign: "left" }}>
+            <h4 style={{ color: "#2E7D32", margin: "0 0 8px", fontSize: "13px" }}>Our Solution</h4>
+            <ul style={{ fontSize: "11px", color: "#555", margin: 0, paddingLeft: "16px", lineHeight: "1.8" }}>
+              <li>Mobile app for ordering bread anytime</li>
+              <li>Pick-up lockers outside the bakery (24/7 access)</li>
+              <li>Vending machines at train stations with built-in ovens</li>
+              <li>Full ingredient & nutrition transparency</li>
+              <li>Loyalty points & recurring orders</li>
+            </ul>
+          </div>
+        </div>
+      ),
+    },
+    {
+      id: "splash",
+      section: "App Flow",
+      content: (
+        <div style={{ height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: "linear-gradient(180deg, #FFF8F0 0%, #F5E6D3 100%)", padding: "40px 20px" }}>
+          <div style={{ fontSize: "72px", marginBottom: "16px" }}>🍞</div>
+          <h1 style={{ color: "#8B4513", margin: "0 0 8px", fontSize: "28px" }}>BakeryGo</h1>
+          <p style={{ color: "#A0522D", fontSize: "13px", margin: "0 0 40px" }}>Fresh Bread, Your Schedule</p>
+          <div style={{ background: "#8B4513", color: "white", padding: "12px 32px", borderRadius: "25px", fontSize: "14px", fontWeight: "bold" }}>Get Started</div>
+        </div>
+      ),
+    },
+    {
+      id: "onboard1",
+      section: "App Flow",
+      content: (
+        <div style={{ padding: "30px 20px", textAlign: "center" }}>
+          <div style={{ fontSize: "56px", marginBottom: "16px" }}>📱</div>
+          <h3 style={{ color: "#8B4513", margin: "0 0 12px" }}>Order Anytime</h3>
+          <p style={{ fontSize: "13px", color: "#666", lineHeight: "1.6" }}>Choose your bread, pick a quantity, and select when you want it ready. No more missing your favourites!</p>
+          <div style={{ display: "flex", justifyContent: "center", gap: "6px", marginTop: "30px" }}>
+            <div style={{ width: "24px", height: "8px", borderRadius: "4px", background: "#8B4513" }}></div>
+            <div style={{ width: "8px", height: "8px", borderRadius: "4px", background: "#DDD" }}></div>
+            <div style={{ width: "8px", height: "8px", borderRadius: "4px", background: "#DDD" }}></div>
+          </div>
+        </div>
+      ),
+    },
+    {
+      id: "onboard2",
+      section: "App Flow",
+      content: (
+        <div style={{ padding: "30px 20px", textAlign: "center" }}>
+          <div style={{ fontSize: "56px", marginBottom: "16px" }}>🔒</div>
+          <h3 style={{ color: "#8B4513", margin: "0 0 12px" }}>Pick Up Anytime</h3>
+          <p style={{ fontSize: "13px", color: "#666", lineHeight: "1.6" }}>Collect your order from smart lockers outside the bakery — even after closing hours. Just use your code!</p>
+          <div style={{ display: "flex", justifyContent: "center", gap: "6px", marginTop: "30px" }}>
+            <div style={{ width: "8px", height: "8px", borderRadius: "4px", background: "#DDD" }}></div>
+            <div style={{ width: "24px", height: "8px", borderRadius: "4px", background: "#8B4513" }}></div>
+            <div style={{ width: "8px", height: "8px", borderRadius: "4px", background: "#DDD" }}></div>
+          </div>
+        </div>
+      ),
+    },
+    {
+      id: "onboard3",
+      section: "App Flow",
+      content: (
+        <div style={{ padding: "30px 20px", textAlign: "center" }}>
+          <div style={{ fontSize: "56px", marginBottom: "16px" }}>⭐</div>
+          <h3 style={{ color: "#8B4513", margin: "0 0 12px" }}>Earn Rewards</h3>
+          <p style={{ fontSize: "13px", color: "#666", lineHeight: "1.6" }}>Collect points with every order. Get free delivery, free products, and exclusive offers!</p>
+          <div style={{ display: "flex", justifyContent: "center", gap: "6px", marginTop: "30px" }}>
+            <div style={{ width: "8px", height: "8px", borderRadius: "4px", background: "#DDD" }}></div>
+            <div style={{ width: "8px", height: "8px", borderRadius: "4px", background: "#DDD" }}></div>
+            <div style={{ width: "24px", height: "8px", borderRadius: "4px", background: "#8B4513" }}></div>
+          </div>
+        </div>
+      ),
+    },
+    {
+      id: "signup",
+      section: "App Flow",
+      content: (
+        <div style={{ padding: "24px 20px" }}>
+          <h3 style={{ color: "#8B4513", margin: "0 0 20px", textAlign: "center" }}>Create Account</h3>
+          {["Full Name", "Email", "Password"].map((field) => (
+            <div key={field} style={{ marginBottom: "12px" }}>
+              <label style={{ fontSize: "11px", color: "#888", display: "block", marginBottom: "4px" }}>{field}</label>
+              <div style={{ border: "1px solid #DDD", borderRadius: "8px", padding: "10px 12px", fontSize: "13px", color: "#AAA", background: "#FAFAFA" }}>
+                {field === "Full Name" ? "Jan Kowalski" : field === "Email" ? "jan@email.com" : "••••••••"}
+              </div>
+            </div>
+          ))}
+          <div style={{ marginBottom: "16px" }}>
+            <label style={{ fontSize: "11px", color: "#888", display: "block", marginBottom: "4px" }}>Delivery Address (optional)</label>
+            <div style={{ border: "1px solid #DDD", borderRadius: "8px", padding: "10px 12px", fontSize: "13px", color: "#AAA", background: "#FAFAFA" }}>ul. Przykładowa 12, Warsaw</div>
+          </div>
+          <div style={{ background: "#8B4513", color: "white", padding: "12px", borderRadius: "10px", textAlign: "center", fontSize: "14px", fontWeight: "bold" }}>Sign Up</div>
+        </div>
+      ),
+    },
+    {
+      id: "home",
+      section: "App Flow",
+      content: (
+        <div style={{ padding: "16px" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
+            <div>
+              <p style={{ fontSize: "11px", color: "#888", margin: 0 }}>Good morning,</p>
+              <h3 style={{ margin: 0, color: "#333" }}>Jan! 👋</h3>
+            </div>
+            <div style={{ background: "#FFF3E0", padding: "6px 10px", borderRadius: "12px", fontSize: "11px" }}>⭐ 240 pts</div>
+          </div>
+          <div style={{ background: "linear-gradient(135deg, #8B4513, #A0522D)", borderRadius: "12px", padding: "14px", color: "white", marginBottom: "14px" }}>
+            <p style={{ fontSize: "11px", margin: "0 0 4px", opacity: 0.8 }}>Your next order</p>
+            <p style={{ fontSize: "14px", margin: "0 0 2px", fontWeight: "bold" }}>2x Sourdough, 1x Croissant</p>
+            <p style={{ fontSize: "11px", margin: 0, opacity: 0.8 }}>Ready at 7:30 AM · Locker #3</p>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", marginBottom: "14px" }}>
+            {[{icon:"🛒",label:"Order Now"},{icon:"📋",label:"Menu"},{icon:"📍",label:"Locations"},{icon:"🎁",label:"Rewards"}].map((item) => (
+              <div key={item.label} style={{ background: "#FFF8F0", borderRadius: "10px", padding: "14px", textAlign: "center" }}>
+                <div style={{ fontSize: "24px", marginBottom: "4px" }}>{item.icon}</div>
+                <p style={{ fontSize: "11px", margin: 0, color: "#555" }}>{item.label}</p>
+              </div>
+            ))}
+          </div>
+          <div style={{ background: "#F5F5F5", borderRadius: "10px", padding: "12px" }}>
+            <p style={{ fontSize: "11px", color: "#888", margin: "0 0 4px" }}>Popular today</p>
+            <p style={{ fontSize: "13px", margin: 0, color: "#333" }}>🥖 Baguette · 🥐 Croissant · 🍞 Rye</p>
+          </div>
+        </div>
+      ),
+    },
+    {
+      id: "menu",
+      section: "App Flow",
+      content: (
+        <div style={{ padding: "16px" }}>
+          <h3 style={{ margin: "0 0 4px", color: "#333" }}>Menu</h3>
+          <p style={{ fontSize: "11px", color: "#888", margin: "0 0 12px" }}>Live availability · Updated now</p>
+          {[
+            { name: "Sourdough Loaf", price: "8.50 zł", avail: true, cal: "220 kcal/100g" },
+            { name: "Butter Croissant", price: "5.00 zł", avail: true, cal: "406 kcal/100g" },
+            { name: "Whole Wheat Bread", price: "7.00 zł", avail: true, cal: "247 kcal/100g" },
+            { name: "Cinnamon Roll", price: "9.00 zł", avail: false, cal: "350 kcal/100g" },
+            { name: "Rye Bread", price: "6.50 zł", avail: true, cal: "259 kcal/100g" },
+          ].map((item) => (
+            <div key={item.name} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px", marginBottom: "8px", background: item.avail ? "#FFF" : "#F9F9F9", borderRadius: "10px", border: "1px solid #EEE", opacity: item.avail ? 1 : 0.5 }}>
+              <div>
+                <p style={{ fontSize: "13px", margin: "0 0 2px", color: "#333", fontWeight: 500 }}>{item.name}</p>
+                <p style={{ fontSize: "10px", margin: 0, color: "#888" }}>{item.cal}</p>
+              </div>
+              <div style={{ textAlign: "right" }}>
+                <p style={{ fontSize: "13px", margin: "0 0 2px", fontWeight: "bold", color: "#8B4513" }}>{item.price}</p>
+                <span style={{ fontSize: "9px", padding: "2px 6px", borderRadius: "4px", background: item.avail ? "#E8F5E9" : "#FFEBEE", color: item.avail ? "#2E7D32" : "#C62828" }}>{item.avail ? "In Stock" : "Sold Out"}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      ),
+    },
+    {
+      id: "product",
+      section: "App Flow",
+      content: (
+        <div style={{ padding: "16px" }}>
+          <div style={{ textAlign: "center", marginBottom: "12px" }}>
+            <div style={{ fontSize: "48px" }}>🍞</div>
+            <h3 style={{ margin: "8px 0 4px", color: "#333" }}>Sourdough Loaf</h3>
+            <p style={{ fontSize: "13px", color: "#8B4513", fontWeight: "bold" }}>8.50 zł</p>
+          </div>
+          <div style={{ background: "#FFF8F0", borderRadius: "10px", padding: "12px", marginBottom: "12px" }}>
+            <h4 style={{ fontSize: "12px", margin: "0 0 8px", color: "#8B4513" }}>Ingredients</h4>
+            <p style={{ fontSize: "11px", color: "#555", margin: 0, lineHeight: "1.6" }}>Wheat flour, water, sourdough starter (wheat flour, water), salt, olive oil</p>
+            <div style={{ marginTop: "8px", display: "flex", gap: "6px" }}>
+              <span style={{ fontSize: "9px", background: "#E8F5E9", padding: "2px 6px", borderRadius: "4px", color: "#2E7D32" }}>No preservatives</span>
+              <span style={{ fontSize: "9px", background: "#FFF3E0", padding: "2px 6px", borderRadius: "4px", color: "#E65100" }}>Contains gluten</span>
+            </div>
+          </div>
+          <div style={{ background: "#F5F5F5", borderRadius: "10px", padding: "12px", marginBottom: "14px" }}>
+            <h4 style={{ fontSize: "12px", margin: "0 0 8px", color: "#333" }}>Nutrition per 100g</h4>
+            {[{label:"Calories",value:"220 kcal"},{label:"Protein",value:"7.5g"},{label:"Carbs",value:"45g"},{label:"Fat",value:"1.2g"},{label:"Fibre",value:"3.1g"}].map((n) => (
+              <div key={n.label} style={{ display: "flex", justifyContent: "space-between", padding: "4px 0", borderBottom: "1px solid #EEE" }}>
+                <span style={{ fontSize: "11px", color: "#555" }}>{n.label}</span>
+                <span style={{ fontSize: "11px", fontWeight: "bold", color: "#333" }}>{n.value}</span>
+              </div>
+            ))}
+          </div>
+          <div style={{ background: "#8B4513", color: "white", padding: "12px", borderRadius: "10px", textAlign: "center", fontSize: "13px", fontWeight: "bold" }}>Add to Order</div>
+        </div>
+      ),
+    },
+    {
+      id: "order",
+      section: "App Flow",
+      content: (
+        <div style={{ padding: "16px" }}>
+          <h3 style={{ margin: "0 0 16px", color: "#333" }}>Your Order</h3>
+          {[{name:"Sourdough Loaf",qty:2,price:"17.00 zł"},{name:"Butter Croissant",qty:1,price:"5.00 zł"}].map((item) => (
+            <div key={item.name} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px", marginBottom: "8px", background: "#FFF8F0", borderRadius: "8px" }}>
+              <div>
+                <p style={{ fontSize: "13px", margin: 0, fontWeight: 500 }}>{item.name}</p>
+                <p style={{ fontSize: "11px", margin: "2px 0 0", color: "#888" }}>Qty: {item.qty}</p>
+              </div>
+              <p style={{ fontSize: "13px", fontWeight: "bold", color: "#8B4513", margin: 0 }}>{item.price}</p>
+            </div>
+          ))}
+          <div style={{ border: "1px solid #EEE", borderRadius: "10px", padding: "12px", marginTop: "12px", marginBottom: "12px" }}>
+            <h4 style={{ fontSize: "12px", margin: "0 0 10px", color: "#333" }}>Pickup Options</h4>
+            <div style={{ display: "flex", gap: "8px", marginBottom: "10px" }}>
+              <div style={{ flex: 1, padding: "8px", borderRadius: "8px", background: "#8B4513", color: "white", textAlign: "center", fontSize: "11px" }}>🔒 Locker</div>
+              <div style={{ flex: 1, padding: "8px", borderRadius: "8px", border: "1px solid #DDD", textAlign: "center", fontSize: "11px", color: "#555" }}>🏠 Delivery</div>
+              <div style={{ flex: 1, padding: "8px", borderRadius: "8px", border: "1px solid #DDD", textAlign: "center", fontSize: "11px", color: "#555" }}>🏪 In-store</div>
+            </div>
+            <div style={{ marginBottom: "8px" }}>
+              <label style={{ fontSize: "10px", color: "#888" }}>Pickup Time</label>
+              <div style={{ border: "1px solid #DDD", borderRadius: "6px", padding: "8px", fontSize: "12px", marginTop: "4px" }}>Tomorrow · 7:30 AM</div>
+            </div>
+          </div>
+          <div style={{ display: "flex", justifyContent: "space-between", padding: "8px 0", borderTop: "1px solid #EEE", marginBottom: "12px" }}>
+            <span style={{ fontSize: "14px", fontWeight: "bold" }}>Total</span>
+            <span style={{ fontSize: "14px", fontWeight: "bold", color: "#8B4513" }}>22.00 zł</span>
+          </div>
+          <div style={{ background: "#8B4513", color: "white", padding: "12px", borderRadius: "10px", textAlign: "center", fontSize: "13px", fontWeight: "bold" }}>Confirm Order → Get Pickup Code</div>
+        </div>
+      ),
+    },
+    {
+      id: "locker",
+      section: "App Flow",
+      content: (
+        <div style={{ padding: "20px", textAlign: "center" }}>
+          <div style={{ fontSize: "48px", marginBottom: "12px" }}>🔒</div>
+          <h3 style={{ color: "#8B4513", margin: "0 0 8px" }}>Order Confirmed!</h3>
+          <p style={{ fontSize: "12px", color: "#666", marginBottom: "20px" }}>Pick up from the locker outside the bakery</p>
+          <div style={{ background: "#FFF8F0", borderRadius: "12px", padding: "20px", marginBottom: "16px" }}>
+            <p style={{ fontSize: "11px", color: "#888", margin: "0 0 4px" }}>Your Pickup Code</p>
+            <h2 style={{ fontSize: "32px", color: "#8B4513", margin: "0 0 8px", letterSpacing: "4px" }}>4 7 2 9</h2>
+            <p style={{ fontSize: "11px", color: "#888", margin: 0 }}>Locker #3 · Available from 7:30 AM</p>
+          </div>
+          <div style={{ background: "#E8F5E9", borderRadius: "10px", padding: "12px", marginBottom: "16px" }}>
+            <p style={{ fontSize: "12px", color: "#2E7D32", margin: 0 }}>✅ You can pick up even after bakery closes (until 11 PM)</p>
+          </div>
+          <div style={{ background: "#F5F5F5", borderRadius: "10px", padding: "12px" }}>
+            <p style={{ fontSize: "11px", color: "#555", margin: 0 }}>+25 loyalty points earned! ⭐</p>
+          </div>
+        </div>
+      ),
+    },
+    {
+      id: "vending",
+      section: "App Flow",
+      content: (
+        <div style={{ padding: "20px", textAlign: "center" }}>
+          <div style={{ fontSize: "48px", marginBottom: "12px" }}>🚂</div>
+          <h3 style={{ color: "#8B4513", margin: "0 0 8px" }}>Vending Machines</h3>
+          <p style={{ fontSize: "12px", color: "#666", marginBottom: "16px" }}>Fresh-baked bread at train stations in under 5 minutes!</p>
+          <div style={{ background: "#FFF8F0", borderRadius: "12px", padding: "16px", marginBottom: "12px", textAlign: "left" }}>
+            <h4 style={{ fontSize: "12px", color: "#8B4513", margin: "0 0 10px" }}>How It Works</h4>
+            {["1. Find a BakeryGo vending machine at your station","2. Choose your bread from the touchscreen","3. The built-in oven bakes it fresh (< 5 min)","4. Enjoy warm, freshly baked bread on the go!"].map((step) => (
+              <p key={step} style={{ fontSize: "11px", color: "#555", margin: "0 0 6px", lineHeight: "1.5" }}>{step}</p>
+            ))}
+          </div>
+          <div style={{ background: "#E3F2FD", borderRadius: "10px", padding: "12px", textAlign: "left" }}>
+            <p style={{ fontSize: "11px", color: "#1565C0", margin: "0 0 4px", fontWeight: "bold" }}>📍 Nearby Machines</p>
+            <p style={{ fontSize: "11px", color: "#555", margin: 0 }}>Warszawa Centralna · Warszawa Zachodnia · Mokotów</p>
+          </div>
+        </div>
+      ),
+    },
+    {
+      id: "rewards",
+      section: "App Flow",
+      content: (
+        <div style={{ padding: "16px" }}>
+          <h3 style={{ margin: "0 0 4px", color: "#333" }}>Rewards</h3>
+          <p style={{ fontSize: "11px", color: "#888", margin: "0 0 14px" }}>Your points: ⭐ 240</p>
+          <div style={{ background: "linear-gradient(135deg, #8B4513, #A0522D)", borderRadius: "12px", padding: "14px", color: "white", marginBottom: "14px" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <div>
+                <p style={{ fontSize: "11px", margin: "0 0 2px", opacity: 0.8 }}>Progress to next reward</p>
+                <p style={{ fontSize: "14px", margin: 0, fontWeight: "bold" }}>240 / 300 pts</p>
+              </div>
+              <div style={{ fontSize: "28px" }}>🎁</div>
+            </div>
+            <div style={{ background: "rgba(255,255,255,0.3)", borderRadius: "4px", height: "6px", marginTop: "10px" }}>
+              <div style={{ background: "white", borderRadius: "4px", height: "6px", width: "80%" }}></div>
+            </div>
+          </div>
+          {[{pts:150,reward:"Free delivery",icon:"🚚"},{pts:300,reward:"Free croissant",icon:"🥐"},{pts:500,reward:"Free sourdough loaf",icon:"🍞"},{pts:1000,reward:"10% off for a month",icon:"🏷️"}].map((r) => (
+            <div key={r.reward} style={{ display: "flex", alignItems: "center", gap: "10px", padding: "10px", marginBottom: "6px", background: r.pts <= 240 ? "#E8F5E9" : "#F9F9F9", borderRadius: "8px", border: "1px solid #EEE" }}>
+              <span style={{ fontSize: "20px" }}>{r.icon}</span>
+              <div style={{ flex: 1 }}>
+                <p style={{ fontSize: "12px", margin: 0, fontWeight: 500 }}>{r.reward}</p>
+                <p style={{ fontSize: "10px", margin: "2px 0 0", color: "#888" }}>{r.pts} points</p>
+              </div>
+              {r.pts <= 240 ? <span style={{ fontSize: "10px", background: "#2E7D32", color: "white", padding: "3px 8px", borderRadius: "4px" }}>Claim</span> : <span style={{ fontSize: "10px", color: "#888" }}>🔒</span>}
+            </div>
+          ))}
+        </div>
+      ),
+    },
+    {
+      id: "questionnaire",
+      section: "Questionnaire",
+      content: (
+        <div style={{ padding: "16px" }}>
+          <h3 style={{ color: "#8B4513", margin: "0 0 4px" }}>Survey</h3>
+          <p style={{ fontSize: "11px", color: "#888", margin: "0 0 14px" }}>Primary Research — Customer Questionnaire</p>
+          {[
+            {q:"1. How often do you buy bread?",options:["Daily","2–3x/week","Weekly","Rarely"]},
+            {q:"2. Do you find your preferred bread sold out?",options:["Often","Sometimes","Rarely","Never"]},
+            {q:"3. Would you use an app to pre-order bread?",options:["Yes definitely","Maybe","Probably not","No"]},
+            {q:"4. Would you use 24/7 pickup lockers?",options:["Yes","Maybe","No"]},
+            {q:"5. Is nutritional info important to you?",options:["Very","Somewhat","Not really","No"]},
+          ].map((item, i) => (
+            <div key={i} style={{ marginBottom: "14px" }}>
+              <p style={{ fontSize: "12px", fontWeight: "bold", color: "#333", margin: "0 0 6px" }}>{item.q}</p>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+                {item.options.map((opt) => (
+                  <span key={opt} style={{ fontSize: "10px", padding: "5px 10px", borderRadius: "14px", border: "1px solid #DDD", color: "#555", background: "#FAFAFA" }}>{opt}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      ),
+    },
+    {
+      id: "questionnaire2",
+      section: "Questionnaire",
+      content: (
+        <div style={{ padding: "16px" }}>
+          <h3 style={{ color: "#8B4513", margin: "0 0 4px" }}>Survey (cont.)</h3>
+          <p style={{ fontSize: "11px", color: "#888", margin: "0 0 14px" }}>Questions 6–10</p>
+          {[
+            {q:"6. Would you use a vending machine with a built-in oven at a train station?",options:["Yes!","Maybe","No"]},
+            {q:"7. Would a loyalty points system motivate you to order more?",options:["Yes","A little","No"]},
+            {q:"8. Would you set up recurring (weekly) orders?",options:["Yes","Maybe","No"]},
+            {q:"9. What matters most when buying bread?",options:["Freshness","Price","Convenience","Ingredients"]},
+            {q:"10. Would you pay extra for home delivery?",options:["Yes","Only if free","No"]},
+          ].map((item, i) => (
+            <div key={i} style={{ marginBottom: "14px" }}>
+              <p style={{ fontSize: "12px", fontWeight: "bold", color: "#333", margin: "0 0 6px" }}>{item.q}</p>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+                {item.options.map((opt) => (
+                  <span key={opt} style={{ fontSize: "10px", padding: "5px 10px", borderRadius: "14px", border: "1px solid #DDD", color: "#555", background: "#FAFAFA" }}>{opt}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+          <div style={{ background: "#E8F5E9", borderRadius: "10px", padding: "12px", marginTop: "8px", textAlign: "center" }}>
+            <p style={{ fontSize: "12px", color: "#2E7D32", margin: 0, fontWeight: "bold" }}>✅ Thank you for your answers!</p>
+          </div>
+        </div>
+      ),
+    },
+  ];
+
+  const currentData = screens[currentScreen];
+  const screenTitles = {
+    intro: "Introduction — Problems & Solution",
+    splash: "Step 1: Splash Screen",
+    onboard1: "Step 2: Onboarding — Order Anytime",
+    onboard2: "Step 3: Onboarding — Pickup Lockers",
+    onboard3: "Step 4: Onboarding — Earn Rewards",
+    signup: "Step 5: Sign Up",
+    home: "Step 6: Home Dashboard",
+    menu: "Step 7: Browse Menu (Live Availability)",
+    product: "Step 8: Product Details & Nutrition",
+    order: "Step 9: Place Order (Locker / Delivery)",
+    locker: "Step 10: Pickup Code Confirmation",
+    vending: "Step 11: Vending Machines at Stations",
+    rewards: "Step 12: Loyalty Rewards",
+    questionnaire: "Questionnaire — Part 1",
+    questionnaire2: "Questionnaire — Part 2",
+  };
+
+  return (
+    <div style={{ fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif", maxWidth: "420px", margin: "0 auto" }}>
+      <div style={{ textAlign: "center", marginBottom: "8px" }}>
+        <span style={{ fontSize: "10px", background: currentData.section === "Introduction" ? "#E3F2FD" : currentData.section === "Questionnaire" ? "#F3E5F5" : "#FFF3E0", color: currentData.section === "Introduction" ? "#1565C0" : currentData.section === "Questionnaire" ? "#6A1B9A" : "#E65100", padding: "3px 10px", borderRadius: "10px", fontWeight: "bold" }}>{currentData.section}</span>
+        <span style={{ fontSize: "10px", color: "#888", marginLeft: "8px" }}>{currentScreen + 1} / {screens.length}</span>
+      </div>
+      <div style={{ border: "3px solid #333", borderRadius: "28px", overflow: "hidden", height: "580px", position: "relative", background: "white", boxShadow: "0 8px 30px rgba(0,0,0,0.12)" }}>
+        <div style={{ background: "#F5F5F5", padding: "8px 16px", display: "flex", justifyContent: "space-between", fontSize: "10px", color: "#333" }}>
+          <span>9:41</span>
+          <span>📶 🔋</span>
+        </div>
+        <div style={{ height: "calc(100% - 30px)", overflowY: "auto" }}>{currentData.content}</div>
+      </div>
+      <p style={{ textAlign: "center", fontSize: "13px", fontWeight: "bold", color: "#333", margin: "12px 0 4px" }}>{screenTitles[currentData.id]}</p>
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "12px", marginTop: "8px" }}>
+        <button onClick={() => setCurrentScreen(Math.max(0, currentScreen - 1))} disabled={currentScreen === 0} style={{ padding: "8px 16px", borderRadius: "8px", border: "none", background: currentScreen === 0 ? "#EEE" : "#8B4513", color: currentScreen === 0 ? "#999" : "white", fontSize: "12px", fontWeight: "bold", cursor: currentScreen === 0 ? "default" : "pointer" }}>← Back</button>
+        <span style={{ fontSize: "11px", color: "#888" }}>{currentScreen + 1}/{screens.length}</span>
+        <button onClick={() => setCurrentScreen(Math.min(screens.length - 1, currentScreen + 1))} disabled={currentScreen === screens.length - 1} style={{ padding: "8px 16px", borderRadius: "8px", border: "none", background: currentScreen === screens.length - 1 ? "#EEE" : "#8B4513", color: currentScreen === screens.length - 1 ? "#999" : "white", fontSize: "12px", fontWeight: "bold", cursor: currentScreen === screens.length - 1 ? "default" : "pointer" }}>Next →</button>
+      </div>
+      <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "4px", marginTop: "12px" }}>
+        {screens.map((s, i) => (
+          <button key={i} onClick={() => setCurrentScreen(i)} style={{ width: "22px", height: "22px", borderRadius: "50%", border: "none", fontSize: "9px", background: i === currentScreen ? "#8B4513" : s.section === "Introduction" ? "#E3F2FD" : s.section === "Questionnaire" ? "#F3E5F5" : "#FFF3E0", color: i === currentScreen ? "white" : "#555", cursor: "pointer", fontWeight: i === currentScreen ? "bold" : "normal" }}>{i + 1}</button>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+ReactDOM.createRoot(document.getElementById('root')).render(<BakeryAppFlow />);
+    </script>
+</body>
+</html>
